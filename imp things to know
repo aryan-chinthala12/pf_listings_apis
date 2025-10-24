@@ -1,0 +1,30 @@
+package main
+
+// ContributorRequest is the expected JSON payload for adding a contributor
+type ContributorRequest struct {
+	ProjectID int    `json:"p_id"`    // The approved_projects.p_id
+	UserID    int    `json:"user_id"` // The names.id of the user to be added
+}
+
+// ... existing models (ApprovedProject, PastProject, etc.)
+
+// Inside the main function of main.go
+
+// ... existing routes
+
+// --- Contributor Management Route ---
+// Requires Creator (Level 3) or Maintainer (Level 4) permissions
+router.HandleFunc("/projects/contributor/add", AuthRequired(AllowContributorHandler)).Methods("POST")
+
+// ...
+
+// for deleting...
+// Inside the main function of main.go
+
+// ... existing routes
+
+// --- Contributor Management Routes ---
+router.HandleFunc("/projects/contributor/add", AuthRequired(AllowContributorHandler)).Methods("POST")
+router.HandleFunc("/projects/contributor/remove", AuthRequired(RemoveContributorHandler)).Methods("DELETE")
+
+// ...
